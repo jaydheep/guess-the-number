@@ -2,50 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Guess the Number</title>
-<meta name="description" content="Find the secret number between 1 and 10. Each guess tells you to go higher or lower.">
+<meta name="description" content="Find the secret number between 1 and 10. Follow the higher and lower hints.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="wrap">
-  <header class="top">
+<main>
+  <div id="fx" aria-hidden="true"></div>
+  <header>
     <h1>Guess the number</h1>
-    <p>I picked a secret number from 1 to 10. Find it in as few tries as you can.</p>
+    <p class="how">I picked a secret number from <b>1 to 10</b>. Tap a number to guess. I will tell you to go <b>higher</b> or <b>lower</b> until you find it.</p>
   </header>
-
-  <ol class="how">
-    <li><b>Tap a number</b> to make a guess.</li>
-    <li>I tell you if the secret is <b>higher</b> or <b>lower</b>.</li>
-    <li>Numbers that can't be it get <b>crossed out</b>. Keep going until you win.</li>
-  </ol>
-
-  <section class="game">
-    <div class="left">
-      <div id="secret" class="secret" aria-label="Secret number">?</div>
-      <p id="range" class="range"></p>
-    </div>
-    <div class="right">
-      <div id="board" class="board" aria-label="Numbers 1 to 10"></div>
-      <div id="hint" class="hint idle" role="status" aria-live="polite">
-        <span id="arrow" class="arrow">?</span>
-        <span id="hintText">Tap any number to make your first guess.</span>
-      </div>
-      <div class="history">
-        <span>Your guesses</span>
-        <ul id="history"></ul>
-      </div>
-      <div class="stats">
-        <span>Tries <b id="tries">0</b></span>
-        <span>Best <b id="best">-</b></span>
-        <button id="reset" type="button">New game</button>
-      </div>
-    </div>
-  </section>
-  <p class="credit">Created by Jaydheep</p>
+  <p class="range">The secret number is between <b id="lo">1</b> and <b id="hi">10</b></p>
+  <section id="board" aria-label="Numbers 1 to 10"></section>
+  <div id="fb" class="fb" role="status" aria-live="polite">
+    <span id="arrow" class="arrow">?</span>
+    <div><strong id="fbT">Your move</strong><p id="fbS">Pick any number from 1 to 10.</p></div>
+  </div>
+  <div class="hist"><span>Your guesses</span><ul id="hist"></ul></div>
+  <footer>
+    <span>Tries <b id="tries">0</b></span>
+    <span>Best <b id="best">-</b></span>
+    <button id="reset" type="button">New game</button>
+  </footer>
+  <small>Created by Jaydheep</small>
 </main>
 <script src="script.js"></script>
 </body>
