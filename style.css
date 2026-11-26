@@ -1,0 +1,22 @@
+:root{--blue:#2336ff;--paper:#fff6dc;--ink:#14123a;--sun:#ffd23f;--mint:#35d6a0}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:20px;background:var(--blue);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif}
+main{width:min(100%,460px);background:var(--paper);border:3px solid var(--ink);border-radius:28px;box-shadow:10px 10px 0 var(--ink);padding:32px 28px 22px;text-align:left}
+h1{margin:0;font-size:clamp(2rem,8vw,2.8rem);line-height:1;font-weight:800;letter-spacing:-.03em}
+header p{margin:10px 0 24px;font-size:1.05rem}
+#board{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{aspect-ratio:1;font-weight:800;font-size:1.7rem;font-family:inherit;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .12s,box-shadow .12s,background .2s}
+.tile:hover:not(:disabled){transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--sun)}
+.tile:active:not(:disabled){transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.tile:focus-visible,#reset:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.tile.out{background:transparent;border-style:dashed;box-shadow:none;color:#14123a55;text-decoration:line-through;cursor:default}
+.tile.hit{background:var(--mint);animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.8)}100%{transform:scale(1)}}
+#msg{min-height:3.2em;margin:22px 0 14px;font-size:1.25rem;font-weight:800;line-height:1.25}
+footer{display:flex;align-items:center;gap:20px;padding-top:16px;border-top:3px solid var(--ink)}
+footer span{font-size:.95rem}
+footer b{margin-left:4px;font-size:1.3rem}
+#reset{margin-left:auto;font:inherit;font-weight:800;color:#fff;background:var(--ink);border:0;border-radius:12px;padding:10px 16px;cursor:pointer}
+#reset:hover{background:var(--blue)}
+small{display:block;margin-top:16px;font-size:.8rem;opacity:.6}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}

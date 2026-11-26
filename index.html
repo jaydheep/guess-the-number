@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guess the Number</title>
+<meta name="description" content="A tiny number guessing game. Find the secret number between 1 and 10.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Guess the number</h1>
+    <p>I'm thinking of a number from 1 to 10.</p>
+  </header>
+  <section id="board" aria-label="Numbers 1 to 10"></section>
+  <p id="msg" role="status" aria-live="polite">Pick a number to start.</p>
+  <footer>
+    <span>Tries <b id="tries">0</b></span>
+    <span>Best <b id="best">-</b></span>
+    <button id="reset" type="button">New game</button>
+  </footer>
+  <small>Created by Jaydheep</small>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
