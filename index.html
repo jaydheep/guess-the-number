@@ -4,33 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Guess the Number</title>
-<meta name="description" content="Find the secret number between 1 and 10. Follow the higher and lower hints.">
+<meta name="author" content="jaydheep R (JK)">
+<meta name="description" content="Guess the Number by jaydheep R (JK): six game modes, a daily challenge, a hot and cold meter, and an AI that guesses your number.">
+<meta name="theme-color" content="#2336ff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main>
-  <div id="fx" aria-hidden="true"></div>
-  <header>
-    <h1>Guess the number</h1>
-    <p class="how">I picked a secret number from <b>1 to 10</b>. Tap a number to guess. I will tell you to go <b>higher</b> or <b>lower</b> until you find it.</p>
-  </header>
-  <p class="range">The secret number is between <b id="lo">1</b> and <b id="hi">10</b></p>
-  <section id="board" aria-label="Numbers 1 to 10"></section>
-  <div id="fb" class="fb" role="status" aria-live="polite">
-    <span id="arrow" class="arrow">?</span>
-    <div><strong id="fbT">Your move</strong><p id="fbS">Pick any number from 1 to 10.</p></div>
-  </div>
-  <div class="hist"><span>Your guesses</span><ul id="hist"></ul></div>
-  <footer>
-    <span>Tries <b id="tries">0</b></span>
-    <span>Best <b id="best">-</b></span>
-    <button id="reset" type="button">New game</button>
-  </footer>
-  <small>Created by Jaydheep</small>
+<div id="bg" class="bg" aria-hidden="true"></div>
+<div id="fx" aria-hidden="true"></div>
+<main id="app">
+  <section id="home" class="screen">
+    <header class="top">
+      <div>
+        <h1>Guess<br>the Number</h1>
+        <p class="tag">Think smart. Find it in the fewest tries.</p>
+      </div>
+      <button id="btnSettings" class="icon" type="button" aria-label="Settings">&#9881;</button>
+    </header>
+    <div class="stats">
+      <div class="stat"><b id="sPlayed">0</b><span>Played</span></div>
+      <div class="stat"><b id="sWin">-</b><span>Win rate</span></div>
+      <div class="stat"><b id="sStreak">0</b><span>Streak</span></div>
+      <div class="stat"><b id="sStars">0</b><span>Stars</span></div>
+    </div>
+    <div id="modes" class="modes"></div>
+    <p class="credit">Created by jaydheep R (JK)</p>
+  </section>
+
+  <section id="play" class="screen" hidden>
+    <div class="card">
+      <div class="bar">
+        <button id="btnBack" class="icon" type="button" aria-label="Back to home">&larr;</button>
+        <div id="pTitle" class="title">Classic</div>
+        <div id="pips" class="pips"></div>
+      </div>
+      <div class="range">
+        <div class="track"><div id="fill"></div><div id="marks"></div></div>
+        <div class="lohi"><span id="loLbl">1</span><b id="rangeTxt"></b><span id="hiLbl">10</span></div>
+      </div>
+      <div id="meter" class="meter">
+        <div class="mbar"><i id="mneedle"></i></div>
+        <span id="mlabel">Make your first guess</span>
+      </div>
+      <div id="fb" class="fb" role="status" aria-live="polite">
+        <span id="arrow" class="arrow">?</span>
+        <div><strong id="fbT">Your move</strong><p id="fbS"></p></div>
+      </div>
+      <div id="pickTiles" class="tiles" hidden></div>
+      <div id="pickDial" class="dial" hidden>
+        <input id="dialIn" type="number" inputmode="numeric" aria-label="Your guess">
+        <input id="dSlider" type="range" min="1" max="100" value="50" aria-label="Guess slider">
+        <div id="steps"></div>
+        <div class="dialrow">
+          <button id="btnMid" class="sm" type="button">Smart pick</button>
+          <button id="btnGuess" class="btn alt grow" type="button">GUESS</button>
+        </div>
+      </div>
+      <div class="hintrow">
+        <button id="btnHint" class="sm" type="button">Hint (3 left)</button>
+        <div id="hintBox" class="hintbox"></div>
+      </div>
+      <ul id="hist" class="hist"></ul>
+    </div>
+  </section>
+
+  <section id="ai" class="screen" hidden>
+    <div class="card">
+      <div class="bar">
+        <button id="aiBack" class="icon" type="button" aria-label="Back to home">&larr;</button>
+        <div class="title">AI guesses</div>
+      </div>
+      <div id="aiIntro" class="aiintro">
+        <h2>Think of a number from 1 to 100</h2>
+        <p>Keep it in your head. I will guess it, and you tell me if your number is higher or lower.</p>
+        <button id="aiReady" class="btn alt" type="button">I am ready</button>
+      </div>
+      <div id="aiPlay" hidden>
+        <p id="aiTry" class="aitry">My guess</p>
+        <div id="aiNum" class="ainum">50</div>
+        <p id="aiRange" class="airange"></p>
+        <div class="aibtns">
+          <button id="aiUp" class="btn" type="button">&#9650;<br>Higher</button>
+          <button id="aiOk" class="btn mint" type="button">&#10003;<br>Correct</button>
+          <button id="aiDown" class="btn" type="button">&#9660;<br>Lower</button>
+        </div>
+        <p id="aiMsg" class="aimsg"></p>
+        <button id="aiRestart" class="btn alt" type="button" hidden>Start again</button>
+        <ul id="aiHist" class="hist"></ul>
+      </div>
+    </div>
+  </section>
 </main>
+
+<div id="modal" class="modal" hidden>
+  <div class="mcard">
+    <h2 id="mTitle">You got it!</h2>
+    <p class="mlabel">The number was</p>
+    <div id="mNum" class="mnum">7</div>
+    <div id="mStarRow" class="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></div>
+    <dl id="mStats" class="msum">
+      <div><dt>Tries</dt><dd id="mTries">0</dd></div>
+      <div><dt>Score</dt><dd id="mScore">0</dd></div>
+      <div><dt>Stars</dt><dd id="mStars">0</dd></div>
+    </dl>
+    <p id="mMsg" class="mmsg"></p>
+    <div class="mbtns">
+      <button id="mAgain" class="btn alt" type="button">Play again</button>
+      <button id="mShare" class="btn" type="button">Share result</button>
+      <button id="mHome" class="btn ghost" type="button">Home</button>
+    </div>
+  </div>
+</div>
+
+<div id="setModal" class="modal" hidden>
+  <div class="mcard">
+    <h2>Settings</h2>
+    <div id="setList" class="setlist"></div>
+    <p class="credit dark">Guess the Number &middot; created by jaydheep R (JK)</p>
+    <button id="setClose" class="btn alt" type="button">Done</button>
+  </div>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
